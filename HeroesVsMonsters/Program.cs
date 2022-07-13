@@ -1,15 +1,14 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using HeroesVsMonsters;
 using HeroesVsMonsters.Characters;
 
+var shorewood = new Shorewood();
 var hero = new Hero();
 var monster = new Monster();
-Console.WriteLine("Hero:");
-Status(hero);
-Console.WriteLine("Monster:");
-Status(monster);
-hero.Hit(monster);
-Status(monster);
+shorewood.InitializeForest();
+shorewood.Fight(hero,monster);
+hero.Rest();
 
 
 //Testing roll the dice
@@ -19,8 +18,3 @@ Status(monster);
 //   Console.WriteLine(d);
 // }
 
-void Status(Character ch)
-{
-  Console.WriteLine("Character: Endurance: {0}. Strength: {1}. HP: {2}", ch.End,
-    ch.Str, ch.HP);
-}
