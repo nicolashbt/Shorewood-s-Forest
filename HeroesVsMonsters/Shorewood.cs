@@ -4,6 +4,8 @@ namespace HeroesVsMonsters;
 
 public class Shorewood
 {
+  private Random rand = new Random();
+
   private void Fight(Character att, Character def)
   {
     Console.WriteLine("{0} attacks {1} !", att, def);
@@ -16,6 +18,7 @@ public class Shorewood
       att.Hit(def);
       if (def.HP > 0) def.Hit(att);
     }
+
     FightEding(att, def);
   }
 
@@ -45,18 +48,41 @@ public class Shorewood
 
   public void StartGame()
   {
-    var hero = new Hero();
     InitializeForest();
-
-    while (!hero.IsDead)
+    var hero = HeroSelecter();
+    while (hero.HP > 0)
     {
-      var monster = new Monster();
+      var monster = MonsterSpawner();
       Fight(hero, monster);
       hero.Rest();
-      // Console.ReadLine();
+      Console.ReadLine();
     }
 
     Console.WriteLine("Game over.");
     Console.WriteLine("Hero won {0} fights", hero.winCounter);
+  }
+
+  private Hero HeroSelecter()
+  {
+    string str = "a";
+    int heroNumber = -1;
+    while (!int.TryParse(str, out heroNumber))
+    {
+      Console.WriteLine("Choose a Hero. (1 for Human, 2 for Dwarf, any number for a Hero)");
+      str = Console.ReadLine();
+    }
+
+    if (heroNumber == 1) return new Human();
+    else if (heroNumber == 2) return new Dwarf();
+    else return new Hero();
+  }
+
+  private Monster MonsterSpawner()
+  {
+    int MonsterNumber = rand.Next(1, 4);
+
+    if (MonsterNumber == 1) return new Orc();
+    else if (MonsterNumber == 2) return new Dragon();
+    else return new Wolf();
   }
 }
