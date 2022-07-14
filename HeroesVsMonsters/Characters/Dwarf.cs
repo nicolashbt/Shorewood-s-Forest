@@ -6,4 +6,9 @@ public class Dwarf : Hero
   {
     End += 2;
   }
+
+  public override string ToString()
+  {
+    return "Dwarf hero";
+  }
 }

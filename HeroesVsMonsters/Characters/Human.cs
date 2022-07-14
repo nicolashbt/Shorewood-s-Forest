@@ -7,4 +7,9 @@ public class Human : Hero
     Str += 1;
     End += 1;
   }
+  
+  public override string ToString()
+  {
+    return "Human hero";
+  }
 }

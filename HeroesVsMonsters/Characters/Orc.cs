@@ -8,4 +8,9 @@ public class Orc : Monster
     //Drops only Gold
     Leather = 0;
   }
+
+  public override string ToString()
+  {
+    return "Orc";
+  }
 }

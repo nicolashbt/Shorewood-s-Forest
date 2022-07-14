@@ -8,4 +8,9 @@ public class Dragon : Monster
     Gold += 1;
     Leather += 1;
   }
+  
+  public override string ToString()
+  {
+    return "Dragon";
+  }
 }
