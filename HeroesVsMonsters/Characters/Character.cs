@@ -4,14 +4,15 @@ public class Character
 {
   public Character()
   {
-    End = RollTheDice(4, 6);
-    Str = RollTheDice(4, 6);
-    HP = End+Modify(End);
+    End = RollTheDice(6, 3);
+    Str = RollTheDice(6, 3);
+    HP = End + Modify(End);
     MaxHP = HP;
     Gold = 0;
     Leather = 0;
     IsDead = false;
   }
+
   public int winCounter { get; set; }
   public int End { get; internal set; }
   public int Str { get; internal set; }
@@ -41,16 +42,16 @@ public class Character
   public int Gold { get; internal set; }
   public int Leather { get; internal set; }
 
-  public static int RollTheDice(int numberDices, int numberFaces)
+  public static int RollTheDice(int dicesTotal = 1, int dicesTaken = 1, int numberFaces = 6)
   {
     var rand = new Random();
-    var dices = new int[numberDices];
+    var dices = new int[dicesTotal];
     for (var index = 0; index < dices.Length; index++)
     {
       dices[index] = rand.Next(1, numberFaces + 1);
     }
 
-    return dices.OrderByDescending(x => x).Take(3).Sum();
+    return dices.OrderByDescending(x => x).Take(dicesTaken).Sum();
   }
 
   public static int Modify(int value)
@@ -75,12 +76,12 @@ public class Character
 
   public void Hit(Character target)
   {
-    int damage = RollTheDice(1, 6) + Modify(Str);
+    int damage = RollTheDice(1, 1,4) + Modify(Str);
     Console.WriteLine("{0} was hit by {1} and lost {2} hp.", target, this, damage);
     target.HP -= damage;
     Console.WriteLine("{0} has {1} hp left.", target, target.HP);
   }
-  
+
   public void Status()
   {
     Console.WriteLine("{0}: Endurance: {1}. Strength: {2}. HP: {3}.", this, this.End,
