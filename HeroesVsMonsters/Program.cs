@@ -4,11 +4,7 @@ using HeroesVsMonsters;
 using HeroesVsMonsters.Characters;
 
 var shorewood = new Shorewood();
-var hero = new Hero();
-var monster = new Monster();
-shorewood.InitializeForest();
-shorewood.Fight(hero,monster);
-hero.Rest();
+shorewood.StartGame();
 
 
 //Testing roll the dice
@@ -17,4 +13,3 @@ hero.Rest();
 // {
 //   Console.WriteLine(d);
 // }
-

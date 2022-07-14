@@ -6,13 +6,13 @@ public class Character
   {
     End = RollTheDice(4, 6);
     Str = RollTheDice(4, 6);
-    HP = Modify(End);
+    HP = End+Modify(End);
     MaxHP = HP;
     Gold = 0;
     Leather = 0;
     IsDead = false;
   }
-
+  public int winCounter { get; set; }
   public int End { get; internal set; }
   public int Str { get; internal set; }
   private int _hp;
@@ -57,19 +57,19 @@ public class Character
   {
     if (value < 5)
     {
-      return value - 1;
+      return -1;
     }
     else if (value < 10)
     {
-      return value;
+      return 0;
     }
     else if (value < 15)
     {
-      return value + 1;
+      return 1;
     }
     else
     {
-      return value + 2;
+      return 2;
     }
   }
 
@@ -79,5 +79,17 @@ public class Character
     Console.WriteLine("{0} was hit by {1} and lost {2} hp.", target, this, damage);
     target.HP -= damage;
     Console.WriteLine("{0} has {1} hp left.", target, target.HP);
+  }
+  
+  public void Status()
+  {
+    Console.WriteLine("{0}: Endurance: {1}. Strength: {2}. HP: {3}.", this, this.End,
+      this.Str, this.HP);
+    if (this.ToString() == "Hero")
+    {
+      Console.WriteLine("{0} has {1} gold and {2} leather.", this, this.Gold, this.Leather);
+    }
+
+    Console.WriteLine();
   }
 }
