@@ -29,37 +29,62 @@ public class Shorewood
     if (att.IsDead)
     {
       Console.WriteLine("{0} is dead !", att);
-      def.winCounter += 1;
+      if (def is Hero)
+      {
+        Looting(def, att);
+        def.WinCounter += 1;
+      }
     }
 
     if (def.IsDead)
     {
       Console.WriteLine("{0} is dead !", def);
-      att.winCounter += 1;
+      if (att is Hero)
+      {
+        Looting(att, def);
+        att.WinCounter += 1;
+      }
+    }
+  }
+
+  private void Looting(Character winner, Character looser)
+  {
+    if (looser.Gold > 0)
+    {
+      winner.Gold += looser.Gold;
+      Console.WriteLine("Hero received {0} gold(s).", looser.Gold);
     }
 
-    Console.WriteLine();
+    if (looser.Leather > 0)
+    {
+      winner.Leather += looser.Leather;
+      Console.WriteLine("Hero received {0} leather(s).", looser.Leather);
+    }
   }
 
   private void InitializeForest()
   {
+    Console.Clear();
     Console.WriteLine("Welcome to the forest of Shorewood.");
   }
-
+  
   public void StartGame()
   {
     InitializeForest();
     var hero = HeroSelecter();
+    Console.Clear();
     while (hero.HP > 0)
     {
       var monster = MonsterSpawner();
       Fight(hero, monster);
       hero.Rest();
       Console.ReadLine();
+      Console.Clear();
     }
 
     Console.WriteLine("Game over.");
-    Console.WriteLine("Hero won {0} fights", hero.winCounter);
+    Console.WriteLine("Hero won {0} fight(s)", hero.WinCounter);
+    Console.WriteLine("Hero had {0} gold(s) and {1} leather(s).", hero.Gold, hero.Leather);
   }
 
   private Hero HeroSelecter()

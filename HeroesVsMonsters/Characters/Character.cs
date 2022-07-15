@@ -13,9 +13,10 @@ public class Character
     IsDead = false;
   }
 
-  public int winCounter { get; set; }
+  public int WinCounter { get; set; }
   public int End { get; internal set; }
   public int Str { get; internal set; }
+
   private int _hp;
 
   public int HP
@@ -28,17 +29,12 @@ public class Character
         _hp = 0;
         IsDead = true;
       }
-      else
-      {
-        _hp = value;
-      }
+      else _hp = value;
     }
   }
 
   public int MaxHP { get; set; }
-
   public bool IsDead { get; set; }
-
   public int Gold { get; internal set; }
   public int Leather { get; internal set; }
 
@@ -76,7 +72,7 @@ public class Character
 
   public void Hit(Character target)
   {
-    int damage = RollTheDice(1, 1,4) + Modify(Str);
+    int damage = RollTheDice(1, 1, 4) + Modify(Str);
     Console.WriteLine("{0} was hit by {1} and lost {2} hp.", target, this, damage);
     target.HP -= damage;
     Console.WriteLine("{0} has {1} hp left.", target, target.HP);
