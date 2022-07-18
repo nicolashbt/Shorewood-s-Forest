@@ -1,14 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using HeroesVsMonsters;
-using HeroesVsMonsters.Characters;
+﻿using HeroesVsMonsters;
 
 var shorewood = new Shorewood();
 shorewood.StartGame();
 
-
 //Testing roll the dice
-// int[] dices = character.RollTheDice();
+// var ch = new Character();
+// int[] dices = ch.RollTheDice();
 // foreach (var d in dices)
 // {
 //   Console.WriteLine(d);
