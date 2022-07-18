@@ -17,6 +17,7 @@ public class FightingState
 
   public void Fighting(Hero hero)
   {
+    Console.Clear();
     var monster = MonsterSpawner();
     Attack(hero, monster);
     hero.Rest();
