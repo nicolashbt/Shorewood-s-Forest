@@ -33,7 +33,7 @@ public class Character
     }
   }
 
-  public int MaxHP { get; set; }
+  public int MaxHP { get; internal set; }
   public bool IsDead { get; set; }
   public int Gold { get; internal set; }
   public int Leather { get; internal set; }
@@ -52,22 +52,11 @@ public class Character
 
   public static int Modify(int value)
   {
-    if (value < 5)
-    {
-      return -1;
-    }
-    else if (value < 10)
-    {
-      return 0;
-    }
-    else if (value < 15)
-    {
-      return 1;
-    }
-    else
-    {
-      return 2;
-    }
+    if (value < 5) return -1;
+    else if (value < 10) return 0;
+    else if (value < 15) return 1;
+    else if (value < 99) return 2;
+    else return 99;
   }
 
   public void Hit(Character target)
@@ -86,7 +75,5 @@ public class Character
     {
       Console.WriteLine("{0} has {1} gold and {2} leather.", this, this.Gold, this.Leather);
     }
-
-    Console.WriteLine();
   }
 }
