@@ -1,5 +1,6 @@
 using HeroesVsMonsters.Characters;
 using HeroesVsMonsters.States;
+using HeroesVsMonsters.Utilities;
 
 namespace HeroesVsMonsters;
 
@@ -10,8 +11,7 @@ public class Shorewood
 
   public void StartGame()
   {
-    InitializeForest();
-    var hero = HeroSelecter();
+    var hero = HeroSelector.HeroSelect();
     _mapState.InitMap();
     MainLoop(hero);
     GameOver(hero);
@@ -53,27 +53,5 @@ public class Shorewood
         break;
       }
     }
-  }
-
-  private Hero HeroSelecter()
-  {
-    string str = "a";
-    int heroNumber = -1;
-    while (!int.TryParse(str, out heroNumber))
-    {
-      Console.WriteLine("Choose a Hero. 1 for Human, 2 for Dwarf, any number for God(testing purposes)");
-      str = Console.ReadLine();
-    }
-
-    Console.Clear();
-    if (heroNumber == 1) return new Human();
-    else if (heroNumber == 2) return new Dwarf();
-    else return new God();
-  }
-
-  private void InitializeForest()
-  {
-    Console.Clear();
-    Console.WriteLine("Welcome to the forest of Shorewood.");
   }
 }
