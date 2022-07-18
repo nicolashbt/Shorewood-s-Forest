@@ -56,14 +56,14 @@ public class Shorewood
     int heroNumber = -1;
     while (!int.TryParse(str, out heroNumber))
     {
-      Console.WriteLine("Choose a Hero. (1 for Human, 2 for Dwarf, any number for a Hero)");
+      Console.WriteLine("Choose a Hero. 1 for Human, 2 for Dwarf, any number for God(testing purposes)");
       str = Console.ReadLine();
     }
 
     Console.Clear();
     if (heroNumber == 1) return new Human();
     else if (heroNumber == 2) return new Dwarf();
-    else return new Hero();
+    else return new God();
   }
 
   private void InitializeForest()
