@@ -11,6 +11,7 @@ public class MapState
   private readonly string[,] _mapArray = new string[_sizeX, _sizeY];
   private readonly int[,] _monsterCoordinates = new int[_monsterNumber, 2];
 
+  public int MonsterNumber = _monsterNumber;
   private void PopulateMap()
   {
     for (int i = 0; i < _sizeX; i++)
@@ -56,6 +57,9 @@ public class MapState
         if (_heroX == _monsterCoordinates[i, 0] && _heroY == _monsterCoordinates[i, 1])
         {
           fightTrigger = true;
+          //moves the monster out of the map to avoid respawning
+          _monsterCoordinates[i, 0] = 99;
+          _monsterCoordinates[i, 1] = 99;
           break;
         }
       }

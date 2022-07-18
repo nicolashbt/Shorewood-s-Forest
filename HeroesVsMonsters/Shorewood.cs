@@ -36,8 +36,9 @@ public class Shorewood
   private void GameOver(Hero hero)
   {
     Console.WriteLine("Game over.");
-    Console.WriteLine("Hero won {0} fight(s)", hero.WinCounter);
-    Console.WriteLine("Hero had {0} gold(s) and {1} leather(s).", hero.Gold, hero.Leather);
+    Console.WriteLine(hero.WinCounter == 10 ? "You won." : "You loose.");
+    Console.WriteLine("{0} won {1} fight(s)", hero, hero.WinCounter);
+    Console.WriteLine("{0} had {1} gold(s) and {2} leather(s).", hero, hero.Gold, hero.Leather);
     Console.WriteLine();
   }
 
@@ -47,6 +48,10 @@ public class Shorewood
     {
       _mapState.Moving();
       _fightingState.Fighting(hero);
+      if (hero.WinCounter == _mapState.MonsterNumber)
+      {
+        break;
+      }
     }
   }
 
