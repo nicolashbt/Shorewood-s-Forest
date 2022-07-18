@@ -1,3 +1,5 @@
+using HeroesVsMonsters.Utilities;
+
 namespace HeroesVsMonsters.States;
 
 public class MapState
@@ -12,6 +14,7 @@ public class MapState
   private readonly int[,] _monsterCoordinates = new int[_monsterNumber, 2];
 
   public int MonsterNumber = _monsterNumber;
+
   private void PopulateMap()
   {
     for (int i = 0; i < _sizeX; i++)
@@ -81,7 +84,7 @@ public class MapState
     {
       int monsterX = _monsterCoordinates[i, 0];
       int monsterY = _monsterCoordinates[i, 1];
-      WriteAt(monsterX, monsterY, "M");
+      UITools.WriteAt(monsterX, monsterY, "M");
     }
   }
 
@@ -89,28 +92,28 @@ public class MapState
   {
     int previousY = _heroY;
     _heroY++;
-    WriteAt(_heroX, previousY, ".");
+    UITools.WriteAt(_heroX, previousY, ".");
   }
 
   private void MoveUp()
   {
     int previousY = _heroY;
     _heroY--;
-    WriteAt(_heroX, previousY, ".");
+    UITools.WriteAt(_heroX, previousY, ".");
   }
 
   private void MoveLeft()
   {
     int previousX = _heroX;
     _heroX--;
-    WriteAt(previousX, _heroY, ".");
+    UITools.WriteAt(previousX, _heroY, ".");
   }
 
   private void MoveRight()
   {
     int previousX = _heroX;
     _heroX++;
-    WriteAt(previousX, _heroY, ".");
+    UITools.WriteAt(previousX, _heroY, ".");
   }
 
   private void ShowArray(string[,] mapArray)
@@ -129,13 +132,6 @@ public class MapState
 
   private void ShowHero()
   {
-    WriteAt(_heroX, _heroY, "H");
-  }
-
-  private void WriteAt(int x, int y, string s)
-  {
-    Console.SetCursorPosition(2 * x, y);
-    Console.Write(s);
-    Console.SetCursorPosition(0, 0);
+    UITools.WriteAt(_heroX, _heroY, "H");
   }
 }
