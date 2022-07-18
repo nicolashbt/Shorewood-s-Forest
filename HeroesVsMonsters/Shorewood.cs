@@ -6,11 +6,13 @@ namespace HeroesVsMonsters;
 public class Shorewood
 {
   private readonly FightingState _fightingState = new FightingState();
+  private readonly MapState _mapState = new MapState();
 
   public void StartGame()
   {
     InitializeForest();
     var hero = HeroSelecter();
+    _mapState.InitMap();
     MainLoop(hero);
     GameOver(hero);
     PlayAgain();
@@ -43,6 +45,7 @@ public class Shorewood
   {
     while (hero.HP != 0)
     {
+      _mapState.Moving();
       _fightingState.Fighting(hero);
     }
   }
