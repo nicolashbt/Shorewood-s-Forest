@@ -11,7 +11,8 @@ public class MapState
   private static readonly int _sizeY = 15;
   private static int _monsterNumber = 10;
   private readonly string[,] _mapArray = new string[_sizeX, _sizeY];
-  private readonly int[,] _monsterCoordinates = new int[_monsterNumber, 2];
+  private readonly int[,] _monsterCoordinates = new int[_monsterNumber, 3];
+  public int NextMonsterType = -1;
 
   public int MonsterNumber = _monsterNumber;
 
@@ -45,6 +46,7 @@ public class MapState
 
   private void MovementListener()
   {
+    NextMonsterType = -1;
     bool fightTrigger = false;
     while (!fightTrigger)
     {
@@ -60,6 +62,7 @@ public class MapState
         if (_heroX == _monsterCoordinates[i, 0] && _heroY == _monsterCoordinates[i, 1])
         {
           fightTrigger = true;
+          NextMonsterType = _monsterCoordinates[i, 2];
           //moves the monster out of the map to avoid respawning
           _monsterCoordinates[i, 0] = 99;
           _monsterCoordinates[i, 1] = 99;
@@ -75,6 +78,8 @@ public class MapState
     {
       _monsterCoordinates[i, 0] = _random.Next(0, _sizeX);
       _monsterCoordinates[i, 1] = _random.Next(0, _sizeY);
+      //monster type 0 = wolf, 1 = orc, 2 = dragon
+      _monsterCoordinates[i, 2] = _random.Next(0, 3);
     }
   }
 
@@ -84,7 +89,10 @@ public class MapState
     {
       int monsterX = _monsterCoordinates[i, 0];
       int monsterY = _monsterCoordinates[i, 1];
-      UITools.WriteAt(monsterX, monsterY, "M");
+      if (_monsterCoordinates[i, 2] == 0) UITools.WriteAt(monsterX, monsterY, "W");
+      else if (_monsterCoordinates[i, 2] == 1) UITools.WriteAt(monsterX, monsterY, "O");
+      else if (_monsterCoordinates[i, 2] == 2) UITools.WriteAt(monsterX, monsterY, "D");
+      else UITools.WriteAt(monsterX, monsterY, "M");
     }
   }
 

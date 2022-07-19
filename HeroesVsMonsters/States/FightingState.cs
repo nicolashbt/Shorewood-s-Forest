@@ -4,21 +4,20 @@ namespace HeroesVsMonsters.States;
 
 public class FightingState
 {
-  private Random rand = new Random();
+  private readonly Random _rand = new Random();
 
-  private Monster MonsterSpawner()
+  private Monster MonsterSpawner(int monsterType)
   {
-    int monsterNumber = rand.Next(1, 4);
-
-    if (monsterNumber == 1) return new Orc();
-    else if (monsterNumber == 2) return new Dragon();
-    else return new Wolf();
+    if (monsterType == 0) return new Wolf();
+    else if (monsterType == 1) return new Orc();
+    else if (monsterType == 2) return new Dragon();
+    else return new Monster();
   }
 
-  public void Fighting(Hero hero)
+  public void Fighting(Hero hero, int monsterType)
   {
     Console.Clear();
-    var monster = MonsterSpawner();
+    var monster = MonsterSpawner(monsterType);
     Attack(hero, monster);
     hero.Rest();
     Console.ReadLine();

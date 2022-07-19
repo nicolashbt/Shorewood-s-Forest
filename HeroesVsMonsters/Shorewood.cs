@@ -47,7 +47,7 @@ public class Shorewood
     while (hero.HP != 0)
     {
       _mapState.Moving();
-      _fightingState.Fighting(hero);
+      _fightingState.Fighting(hero,_mapState.NextMonsterType);
       if (hero.WinCounter == _mapState.MonsterNumber)
       {
         break;
