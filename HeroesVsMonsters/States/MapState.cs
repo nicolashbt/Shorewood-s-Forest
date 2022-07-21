@@ -4,7 +4,7 @@ namespace HeroesVsMonsters.States;
 
 public class MapState
 {
-  private readonly Random _random = new Random();
+  private readonly Random _random;
   private int _heroX = 0;
   private int _heroY = 0;
   private static readonly int _sizeX = 15;
@@ -15,6 +15,11 @@ public class MapState
   public int NextMonsterType = -1;
 
   public int MonsterNumber = _monsterNumber;
+
+  public MapState(Random random)
+  {
+    _random = random;
+  }
 
   private void PopulateMap()
   {

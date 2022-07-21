@@ -6,9 +6,17 @@ namespace HeroesVsMonsters;
 
 public class Shorewood
 {
-  private readonly FightingState _fightingState = new FightingState();
-  private readonly MapState _mapState = new MapState();
-  private readonly HeroSelector _selector = new HeroSelector();
+  private readonly FightingState _fightingState;
+  private readonly MapState _mapState;
+  private readonly HeroSelector _selector;
+
+  public Shorewood(FightingState fightingState, MapState mapState, HeroSelector selector)
+  {
+    _fightingState = fightingState;
+    _mapState = mapState;
+    _selector = selector;
+  }
+
 
   public void StartGame()
   {
