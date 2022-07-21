@@ -2,12 +2,12 @@ using HeroesVsMonsters.Characters;
 
 namespace HeroesVsMonsters.Utilities;
 
-public static class HeroSelector
+public class HeroSelector
 {
-  private static int _numberOfChoices = 3;
-  private static int _cursorPosition = 1;
+  private int _numberOfChoices = 3;
+  private int _cursorPosition = 1;
 
-  public static Hero HeroSelect()
+  public Hero HeroSelect()
   {
     _cursorPosition = 1;
     Console.Clear();
@@ -38,18 +38,18 @@ public static class HeroSelector
     else return new God();
   }
 
-  private static void ShowCursor()
+  private void ShowCursor()
   {
     UITools.WriteAt(0, _cursorPosition, ">>");
   }
 
-  private static void MoveCursorDown()
+  private void MoveCursorDown()
   {
     UITools.WriteAt(0, _cursorPosition, "  ");
     _cursorPosition++;
   }
 
-  private static void MoveCursorUp()
+  private void MoveCursorUp()
   {
     UITools.WriteAt(0, _cursorPosition, "  ");
     _cursorPosition--;

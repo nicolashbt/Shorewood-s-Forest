@@ -8,10 +8,11 @@ public class Shorewood
 {
   private readonly FightingState _fightingState = new FightingState();
   private readonly MapState _mapState = new MapState();
+  private readonly HeroSelector _selector = new HeroSelector();
 
   public void StartGame()
   {
-    var hero = HeroSelector.HeroSelect();
+    var hero = _selector.HeroSelect();
     _mapState.InitMap();
     MainLoop(hero);
     GameOver(hero);
