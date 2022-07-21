@@ -21,14 +21,7 @@ public class Character
   public int HP
   {
     get { return _hp; }
-    set
-    {
-      if (value < 0)
-      {
-        _hp = 0;
-      }
-      else _hp = value;
-    }
+    set { _hp = value < 0 ? 0 : value; }
   }
 
   public int MaxHP { get; internal set; }
@@ -47,7 +40,7 @@ public class Character
     return dices.OrderByDescending(x => x).Take(dicesTaken).Sum();
   }
 
-  public static int Modify(int value)
+  private static int Modify(int value)
   {
     if (value < 5) return -1;
     else if (value < 10) return 0;
@@ -58,9 +51,9 @@ public class Character
 
   public void Hit(Character target)
   {
-    int damage = RollTheDice(1, 1, 4) + Modify(Str);
+    int damage = RollTheDice(1, 1, 4) + Modify(Str) + WinCounter / 3;
     target.HP -= damage;
-    Console.WriteLine("{0} was hit by {1} and lost {2} hp. {0} has {3} hp(s) left.", target, this, damage, target.HP);
+    Console.WriteLine("{0} deals {2} damage(s) to {1}. {0} has {3} hp(s) left.", this, target, damage, target.HP);
   }
 
   public void Status()

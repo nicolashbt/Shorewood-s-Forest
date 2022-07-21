@@ -41,12 +41,13 @@ public class FightingState
 
   private void FightEnding(Hero hero, Monster monster)
   {
+    Console.WriteLine();
     Console.WriteLine("The fight is finished !");
-
     if (monster.HP <= 0)
     {
       hero.WinCounter += 1;
       Console.WriteLine("{0} is dead !", monster);
+      Console.WriteLine("{0} grew stronger !", hero);
       Looting(hero, monster);
     }
   }
