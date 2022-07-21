@@ -57,19 +57,25 @@ public class MapState
       if (keyPressed == ConsoleKey.RightArrow && _heroX < _sizeX - 1) MoveRight();
       if (keyPressed == ConsoleKey.LeftArrow && _heroX > 0) MoveLeft();
       ShowHero();
-      for (int i = 0; i < _monsterNumber; i++)
+      fightTrigger = DistanceChecker();
+    }
+  }
+
+  private bool DistanceChecker()
+  {
+    for (int i = 0; i < _monsterNumber; i++)
+    {
+      if (Math.Abs(_heroX - _monsterCoordinates[i, 0]) + Math.Abs(_heroY - _monsterCoordinates[i, 1]) <=1 )
       {
-        if (_heroX == _monsterCoordinates[i, 0] && _heroY == _monsterCoordinates[i, 1])
-        {
-          fightTrigger = true;
-          NextMonsterType = _monsterCoordinates[i, 2];
-          //moves the monster out of the map to avoid respawning
-          _monsterCoordinates[i, 0] = 99;
-          _monsterCoordinates[i, 1] = 99;
-          break;
-        }
+        NextMonsterType = _monsterCoordinates[i, 2];
+        //moves the monster out of the map to avoid respawning
+        _monsterCoordinates[i, 0] = 99;
+        _monsterCoordinates[i, 1] = 99;
+        return true;
       }
     }
+
+    return false;
   }
 
   private void GenerateMonstersCoordinates()
