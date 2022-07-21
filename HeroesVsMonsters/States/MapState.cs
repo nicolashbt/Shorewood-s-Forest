@@ -52,10 +52,10 @@ public class MapState
     {
       ConsoleKey keyPressed = Console.ReadKey().Key;
 
-      if (keyPressed == ConsoleKey.UpArrow && _heroY > 0) MoveUp();
-      if (keyPressed == ConsoleKey.DownArrow && _heroY < _sizeY - 1) MoveDown();
-      if (keyPressed == ConsoleKey.RightArrow && _heroX < _sizeX - 1) MoveRight();
-      if (keyPressed == ConsoleKey.LeftArrow && _heroX > 0) MoveLeft();
+      if (keyPressed == ConsoleKey.DownArrow) MoveDown();
+      else if (keyPressed == ConsoleKey.UpArrow) MoveUp();
+      else if (keyPressed == ConsoleKey.LeftArrow) MoveLeft();
+      else if (keyPressed == ConsoleKey.RightArrow) MoveRight();
       ShowHero();
       fightTrigger = DistanceChecker();
     }
@@ -65,7 +65,7 @@ public class MapState
   {
     for (int i = 0; i < _monsterNumber; i++)
     {
-      if (Math.Abs(_heroX - _monsterCoordinates[i, 0]) + Math.Abs(_heroY - _monsterCoordinates[i, 1]) <=1 )
+      if (Math.Abs(_heroX - _monsterCoordinates[i, 0]) + Math.Abs(_heroY - _monsterCoordinates[i, 1]) <= 1)
       {
         NextMonsterType = _monsterCoordinates[i, 2];
         //moves the monster out of the map to avoid respawning
@@ -104,30 +104,38 @@ public class MapState
 
   private void MoveDown()
   {
-    int previousY = _heroY;
-    _heroY++;
-    UITools.WriteAt(_heroX, previousY, ".");
+    if (_heroY < _sizeY - 1)
+    {
+      ResetHeroPos();
+      _heroY++;
+    }
   }
 
   private void MoveUp()
   {
-    int previousY = _heroY;
-    _heroY--;
-    UITools.WriteAt(_heroX, previousY, ".");
+    if (_heroY > 0)
+    {
+      ResetHeroPos();
+      _heroY--;
+    }
   }
 
   private void MoveLeft()
   {
-    int previousX = _heroX;
-    _heroX--;
-    UITools.WriteAt(previousX, _heroY, ".");
+    if (_heroX > 0)
+    {
+      ResetHeroPos();
+      _heroX--;
+    }
   }
 
   private void MoveRight()
   {
-    int previousX = _heroX;
-    _heroX++;
-    UITools.WriteAt(previousX, _heroY, ".");
+    if (_heroX < _sizeX - 1)
+    {
+      ResetHeroPos();
+      _heroX++;
+    }
   }
 
   private void ShowArray(string[,] mapArray)
@@ -147,5 +155,10 @@ public class MapState
   private void ShowHero()
   {
     UITools.WriteAt(_heroX, _heroY, "H");
+  }
+
+  private void ResetHeroPos()
+  {
+    UITools.WriteAt(_heroX, _heroY, ".");
   }
 }
