@@ -36,10 +36,10 @@ public class FightingState
       if (def.HP > 0) def.Hit(att);
     }
 
-    FightEding(att, def);
+    FightEnding(att, def);
   }
 
-  private void FightEding(Character att, Character def)
+  private void FightEnding(Character att, Character def)
   {
     Console.WriteLine("The fight is finished !");
 
