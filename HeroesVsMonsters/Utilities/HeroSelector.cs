@@ -9,6 +9,7 @@ public static class HeroSelector
 
   public static Hero HeroSelect()
   {
+    _cursorPosition = 1;
     Console.Clear();
     Console.WriteLine("Welcome to the forest of Shorewood. Choose a Hero:");
     Console.WriteLine(">>Human");
