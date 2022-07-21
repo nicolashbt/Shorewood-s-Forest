@@ -24,58 +24,45 @@ public class FightingState
     Console.Clear();
   }
 
-  private void Attack(Character att, Character def)
+  private void Attack(Hero hero, Monster monster)
   {
-    Console.WriteLine("{0} attacks {1} !", att, def);
+    Console.WriteLine("{0} attacks {1} !", hero, monster);
     // att.Status();
     // def.Status();
     Console.WriteLine();
-    while (att.HP > 0 && def.HP > 0)
+    while (hero.HP > 0 && monster.HP > 0)
     {
-      att.Hit(def);
-      if (def.HP > 0) def.Hit(att);
+      hero.Hit(monster);
+      if (monster.HP > 0) monster.Hit(hero);
     }
 
-    FightEnding(att, def);
+    FightEnding(hero, monster);
   }
 
-  private void FightEnding(Character att, Character def)
+  private void FightEnding(Hero hero, Monster monster)
   {
     Console.WriteLine("The fight is finished !");
 
-    if (att.IsDead)
+    if (monster.HP <= 0)
     {
-      Console.WriteLine("{0} is dead !", att);
-      if (def is Hero)
-      {
-        Looting(def, att);
-        def.WinCounter += 1;
-      }
-    }
-
-    if (def.IsDead)
-    {
-      Console.WriteLine("{0} is dead !", def);
-      if (att is Hero)
-      {
-        Looting(att, def);
-        att.WinCounter += 1;
-      }
+      hero.WinCounter += 1;
+      Console.WriteLine("{0} is dead !", monster);
+      Looting(hero, monster);
     }
   }
 
-  private void Looting(Character winner, Character looser)
+  private void Looting(Hero hero, Monster monster)
   {
-    if (looser.Gold > 0)
+    if (monster.Gold > 0)
     {
-      winner.Gold += looser.Gold;
-      Console.WriteLine("Hero received {0} gold(s).", looser.Gold);
+      hero.Gold += monster.Gold;
+      Console.WriteLine("Hero received {0} gold(s).", monster.Gold);
     }
 
-    if (looser.Leather > 0)
+    if (monster.Leather > 0)
     {
-      winner.Leather += looser.Leather;
-      Console.WriteLine("Hero received {0} leather(s).", looser.Leather);
+      hero.Leather += monster.Leather;
+      Console.WriteLine("Hero received {0} leather(s).", monster.Leather);
     }
   }
 }

@@ -15,10 +15,10 @@ public class Shorewood
     _mapState.InitMap();
     MainLoop(hero);
     GameOver(hero);
-    PlayAgain();
+    PlayAgain(hero);
   }
 
-  private void PlayAgain()
+  private void PlayAgain(Hero hero)
   {
     string playAgain = "";
     while (playAgain != "no")
@@ -27,8 +27,9 @@ public class Shorewood
       playAgain = Console.ReadLine().ToLower();
       if (playAgain == "yes")
       {
+        hero.WinCounter = 0;
         StartGame();
-        break;
+        return;
       }
     }
   }
@@ -36,7 +37,7 @@ public class Shorewood
   private void GameOver(Hero hero)
   {
     Console.WriteLine("Game over.");
-    Console.WriteLine(hero.WinCounter == 10 ? "You won." : "You loose.");
+    Console.WriteLine(hero.WinCounter == _mapState.MonsterNumber ? "You won." : "You loose.");
     Console.WriteLine("{0} won {1} fight(s)", hero, hero.WinCounter);
     Console.WriteLine("{0} had {1} gold(s) and {2} leather(s).", hero, hero.Gold, hero.Leather);
     Console.WriteLine();
@@ -47,11 +48,8 @@ public class Shorewood
     while (hero.HP != 0)
     {
       _mapState.Moving();
-      _fightingState.Fighting(hero,_mapState.NextMonsterType);
-      if (hero.WinCounter == _mapState.MonsterNumber)
-      {
-        break;
-      }
+      _fightingState.Fighting(hero, _mapState.NextMonsterType);
+      if (hero.WinCounter >= _mapState.MonsterNumber) return;
     }
   }
 }
