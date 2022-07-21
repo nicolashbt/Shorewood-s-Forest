@@ -12,30 +12,29 @@ public class HeroSelector
     _cursorPosition = 1;
     Console.Clear();
     Console.WriteLine("Welcome to the forest of Shorewood. Choose a Hero:");
-    Console.WriteLine(">>Human");
+    Console.WriteLine("  Human");
     Console.WriteLine("  Dwarf");
     Console.WriteLine("  God (Testing only)");
-    ConsoleKey keyPressed = ConsoleKey.A;
-    while (keyPressed != ConsoleKey.Enter)
-    {
-      keyPressed = Console.ReadKey().Key;
-      if (keyPressed == ConsoleKey.UpArrow && _cursorPosition > 1)
-      {
-        MoveCursorUp();
-        ShowCursor();
-      }
-
-      if (keyPressed == ConsoleKey.DownArrow && _cursorPosition < _numberOfChoices)
-      {
-        MoveCursorDown();
-        ShowCursor();
-      }
-    }
+    ShowCursor();
+    KeyListener();
 
     Console.Clear();
     if (_cursorPosition == 1) return new Human();
     else if (_cursorPosition == 2) return new Dwarf();
     else return new God();
+  }
+
+  private void KeyListener()
+  {
+    ConsoleKey keyPressed = ConsoleKey.A;
+    while (keyPressed != ConsoleKey.Enter)
+    {
+      keyPressed = Console.ReadKey().Key;
+      if (keyPressed == ConsoleKey.UpArrow && _cursorPosition > 1) MoveCursorUp();
+      else if (keyPressed == ConsoleKey.DownArrow && _cursorPosition < _numberOfChoices) MoveCursorDown();
+
+      ShowCursor();
+    }
   }
 
   private void ShowCursor()
