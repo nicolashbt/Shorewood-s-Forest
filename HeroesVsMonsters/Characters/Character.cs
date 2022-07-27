@@ -53,7 +53,7 @@ public class Character
   {
     int damage = RollTheDice(1, 1, 4) + Modify(Str) + WinCounter / 3;
     target.HP -= damage;
-    Console.WriteLine("{0} deals {2} damage(s) to {1}. {0} has {3} hp(s) left.", this, target, damage, target.HP);
+    Console.WriteLine("{0} deals {2} damage(s) to {1}. {1} has {3} hp(s) left.", this, target, damage, target.HP);
   }
 
   public void Status()
