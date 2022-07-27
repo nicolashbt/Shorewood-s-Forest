@@ -74,8 +74,8 @@ public class MapState
       {
         NextMonsterType = _monsterCoordinates[i, 2];
         //moves the monster out of the map to avoid respawning
-        _monsterCoordinates[i, 0] = 99;
-        _monsterCoordinates[i, 1] = 99;
+        _monsterCoordinates[i, 0] = 50;
+        _monsterCoordinates[i, 1] = 50;
         return true;
       }
     }
