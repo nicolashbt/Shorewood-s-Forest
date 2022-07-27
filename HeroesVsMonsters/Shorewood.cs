@@ -32,9 +32,9 @@ public class Shorewood
     string playAgain = "";
     while (playAgain != "no")
     {
-      Console.WriteLine("Do you want to play again? Yes/No");
+      Console.WriteLine("Do you want to play again? Yes or press Enter/No");
       playAgain = Console.ReadLine().ToLower();
-      if (playAgain == "yes")
+      if (playAgain == "yes" || playAgain == "")
       {
         hero.WinCounter = 0;
         StartGame();
